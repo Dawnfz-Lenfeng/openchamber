@@ -641,6 +641,12 @@ describe('Dollar math rendering', () => {
     expect(emphasized).toContain('katex');
     expect(emphasized).not.toContain('<em>');
     expect(emphasized).not.toContain('$a_i');
+
+    // The mask's display branch must cover `$$...$$` too.
+    const display = renderMarkdownSync('$$\\boldsymbol{b}=(\\boldsymbol{\\alpha},\\boldsymbol{\\beta}_B,\\boldsymbol{\\gamma}_{AB})^\\top$$');
+    expect(display).toContain('katex-display');
+    expect(display).not.toContain('<em>');
+    expect(display).not.toContain('$$');
   });
 
   test('renders display math containing apostrophes and ampersands', () => {
